@@ -1,0 +1,23 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+// 2. Stores the message displayed on the main page
+model Message {
+  id        Int      @id @default(autoincrement())
+  content   String
+  createdAt DateTime @default(now())
+}
+
+// 3. Stores the browser "phone numbers" (subscriptions)
+model Subscription {
+  id        Int      @id @default(autoincrement())
+  endpoint  String   @unique
+  keys      Json // specific keys required by web-push (p256dh, auth)
+  createdAt DateTime @default(now())
+}

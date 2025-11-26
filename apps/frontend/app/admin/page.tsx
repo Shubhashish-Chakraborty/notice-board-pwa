@@ -9,7 +9,7 @@ export default function AdminPage() {
         setStatus('Sending...');
 
         try {
-            const res = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/api/broadcast`, {
+            const res = await fetch(`https://shubhpwaapi.vercel.app/api/broadcast`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ content: text })

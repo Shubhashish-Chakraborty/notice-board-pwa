@@ -7,8 +7,18 @@ import { VAPID_PRIVATE_KEY, VAPID_PUBLIC_KEY } from './config';
 const app = express();
 const PORT = 3001;
 
-// Middleware
-app.use(cors());
+const corsOptions = {
+    origin: [
+        'http://localhost:3000',
+        'http://localhost:3001',
+        'https://shubhpwa.vercel.app',
+    ],
+    credentials: true,
+    optionsSuccessStatus: 200
+};
+
+app.use(cors(corsOptions));
+
 app.use(express.json());
 
 webpush.setVapidDetails(

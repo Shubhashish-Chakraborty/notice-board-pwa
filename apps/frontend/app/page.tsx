@@ -39,10 +39,17 @@ export default function HomePage() {
       // Wait for SW to be ready
       await navigator.serviceWorker.ready;
 
+      const vapidKey = process.env.NEXT_PUBLIC_VAPID_KEY;
+      
+      if (!vapidKey) {
+        console.error('NEXT_PUBLIC_VAPID_KEY is not set');
+        return;
+      }
+
       // Subscribe (Browser asks user for permission here)
       const subscription = await register.pushManager.subscribe({
         userVisibleOnly: true,
-        applicationServerKey: urlBase64ToUint8Array(process.env.PUBLIC_VAPID_KEY as string)
+        applicationServerKey: urlBase64ToUint8Array(vapidKey)
       });
 
       // Send subscription to Backend

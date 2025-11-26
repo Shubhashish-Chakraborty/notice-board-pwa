@@ -21,7 +21,7 @@ export default function HomePage() {
 
   // 1. Fetch the latest text from DB
   const fetchMessage = async () => {
-    const res = await fetch('http://localhost:3001/api/message');
+    const res = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/api/message`);
     const data = await res.json();
     setMessage(data.content);
   };
@@ -46,7 +46,7 @@ export default function HomePage() {
       });
 
       // Send subscription to Backend
-      await fetch('http://localhost:3001/api/subscribe', {
+      await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/api/subscribe`, {
         method: 'POST',
         body: JSON.stringify(subscription),
         headers: { 'Content-Type': 'application/json' }
